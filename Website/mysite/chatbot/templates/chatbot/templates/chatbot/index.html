@@ -1,0 +1,28 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'chatbot/style.css' %}">
+<div id="body">
+<div id="wrapper">
+    <div id="container">
+    <div id="message-container">
+    {% if latest_conv_list %}
+        <ul>
+        {% for conv in latest_conv_list %}
+            <li>Person: {{ conv.context.input_text }}</li>
+            <li>Bot: {{ conv.response.response_text }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No conversation yet.</p>
+    {% endif %}
+    </div>
+    <form method="GET" id="message-form">
+        <input type="text" name="context" placeholder="Enter input here" id="chat-input"><br/>
+        <input type="submit" value="Submit" id="chat-button"/>
+    </form>
+    </div>
+    <form method="POST" id="reset-form">
+        <input type="submit" value="Reset conversation" id="reset-button"/>
+    </form>
+</div>
+</div>
